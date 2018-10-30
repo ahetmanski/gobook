@@ -1,0 +1,6 @@
+print
+bear
+print
+foo
+bear
+print
