@@ -20,6 +20,7 @@ func main() {
 			os.Exit(1)
 		}
 		defer resp.Body.Close()
+		fmt.Printf("\nResponse status code: %v\n", resp.Status)
 
 		_, err = io.Copy(os.Stdout, resp.Body)
 		if err != nil {
