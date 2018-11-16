@@ -15,10 +15,16 @@ func main() {
 	for _, url := range os.Args[1:] {
 		go fetch(url, ch)
 	}
-	for range os.Args[1:] {
-		fmt.Println(<-ch)
+	filename := "output.txt"
+	file, err := os.Create(filename)
+	if err != nil {
+		fmt.Printf("Couldn't create file %s: %v", filename, err)
 	}
-	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
+	defer file.Close()
+	for range os.Args[1:] {
+		fmt.Fprintln(file, <-ch)
+	}
+	fmt.Fprintf(file, "%.2fs elapsed\n", time.Since(start).Seconds())
 }
 
 func fetch(url string, ch chan<- string) {
