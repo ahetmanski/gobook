@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"sync"
+
+	"github.com/ahetmanski/gobook/ch1/lissajous"
 )
 
 var (
@@ -15,6 +17,9 @@ var (
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/count", counter)
+	http.HandleFunc("/lissajous", func(w http.ResponseWriter, _ *http.Request) {
+		lissajous.Lissajous(w)
+	})
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
