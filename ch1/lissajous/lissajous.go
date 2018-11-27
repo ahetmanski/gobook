@@ -1,6 +1,6 @@
 // Lissajous generates animated GIF from
 // random Lissajous figures.
-package main
+package lissajous
 
 import (
 	"image"
@@ -9,7 +9,6 @@ import (
 	"io"
 	"math"
 	"math/rand"
-	"os"
 	"time"
 )
 
@@ -41,13 +40,8 @@ const (
 	backgroundIndex = 0
 )
 
-func main() {
-	lissajous(os.Stdout)
-}
-
-func lissajous(out io.Writer) {
+func Lissajous(out io.Writer, cycles float64) {
 	const (
-		cycles    = 5
 		res       = 0.001 //Sin() function resolution
 		size      = 100
 		nframes   = 64 // Animation frames count
